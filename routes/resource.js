@@ -18,3 +18,11 @@ router.get('/jaguars/:id', jaguar_controller.jaguar_detail);
 // GET request for list of all jaguar items.
 router.get('/jaguars', jaguar_controller.jaguar_list);
 module.exports = router;
+exports.api = function(req, res) {
+    res.write('[');
+    res.write('{"resource":"costumes", ');
+    res.write(' "verbs":["GET","PUT", "DELETE"] ');
+    res.write('}');
+    res.write(']')
+    res.send();
+    };

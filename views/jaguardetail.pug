@@ -1,0 +1,23 @@
+extends layout
+
+block content
+  - if (toShow != null)
+    h1(class='detailh1')= title
+
+    - let jaguarid = toShow._id
+    - let jaguar_color = toShow.jaguar_color
+    - let jaguar_breed = toShow.jaguar_breed
+    - let jaguar_price = toShow.jaguar_price 
+
+    div
+      div.row
+        div(class='costumeAttr1') jaguar ID is: #{jaguarid} 
+      div.row
+        div(class='costumeAttr1') jaguar color is: #{jaguar_color}
+      div.row
+        div(class='costumeAttr1') jaguar breed is: #{jaguar_breed} 
+      div.row
+        div(class='costumeAttr1') jaguar price is: #{jaguar_price}
+  - else
+    script.
+      alert('Error: No jaguar found with the provided ID.');
