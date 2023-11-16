@@ -1,0 +1,47 @@
+extends layout
+
+block content
+  h1= title
+
+  if(toShow == null)
+    h2 No instance to delete
+  else
+    - let jaguarid = toShow._id
+    - let jaguar_color = toShow.jaguar_color
+    - let jaguar_breed = toShow.jaguar_breed
+    - let jaguar_price = toShow.jaguar_price
+    - let actionid = "/resource/jaguars/" + jaguarid
+    script let actionid = "#{actionid}"
+    div
+     div.row 
+      div(class='jaguarAttr mr-3') jaguar ID is:
+      div #{jaguarid}
+     div.row
+      div(class='jaguarAttr mr-3') jaguar color is:
+      div #{jaguar_color}
+     div.row
+      div(class='jaguarAttr mr-3') jaguar breed is:
+      div #{jaguar_breed}
+     div.row
+      div(class='jaguarAttr mr-3') jaguar Price is:
+      div #{jaguar_price}
+    button(class="btn btn-danger m-2" onclick="deleteOnid()") Delete
+    button(class="btn btn-secondary m-2" onclick="cancel()") Cancel
+  script.
+   function cancel() {
+    window.location.href='/jaguars'
+    }
+  script.
+    function deleteOnid() {
+     console.log("starting delete")
+     fetch(actionid, {
+      method: 'DELETE'
+     }).then((resp) => {
+        return resp.json();
+     }).then((body) => {
+        alert("Delete succeded")
+        window.location.href='/jaguar'
+     }).catch((error) => {
+        alert("Delete failed " + error )
+     });
+    }

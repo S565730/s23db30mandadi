@@ -1,0 +1,57 @@
+extends layout
+
+block content
+  h1= title
+
+  if(toShow == null)
+    h2 No instance to update
+  else
+    - let jaguarid = toShow._id
+    - let jaguar_color = toShow.jaguar_color
+    - let jaguar_breed = toShow.jaguar_breed
+    - let jaguar_price = toShow.jaguar_price
+    - let actionid = "/resource/jaguars/" + jaguarid
+    script let actionid = "#{actionid}"
+    div.row(class='mb-2')
+    div.mr-1 ID is 
+      span(style="color:red")  #{jaguarid}
+    form(id='jaguarForm', action= actionid, method="PUT")
+      div.form-group
+      div(class="row g-3 align-items-center")
+        div(class="col-1")
+          label.jaguarAttr(for='jaguar_color',class="col-form-label") jaguar Colour
+        div(class="col-auto")
+          input#jaguar_color(type='text', name='jaguar_color',class="form-control", value=jaguar_color)
+      div.form-group
+      div(class="row g-3 align-items-center")
+        div(class="col-1")
+          label.jaguarAttr(for='jaguar_breed',class="col-form-label") jaguar Breed 
+        div(class="col-auto")
+          input#jaguar_breed(type='text', name='jaguar_breed',class="form-control", value=jaguar_breed)
+      div.form-group
+      div(class="row g-3 align-items-center")
+        div(class="col-1")
+          label.jaguarAttr(for='jaguar_price',class="col-form-label") jaguar cost
+        div(class="col-auto")
+          input#jaguar_price(type='number', name='jaguar_price',class="form-control", value=jaguar_price)
+      input(class="btn btn-danger m-2" type="submit")
+        //- button(class="btn btn-danger m-2" onclick="deleteOnid()") Delete
+      button(class="btn btn-secondary m-2" onclick="cancel()") Cancel
+    
+    script.
+      document.forms['jaguarForm'].addEventListener('submit', (event) => {
+       event.preventDefault();
+      // TODO do something here to show user that form is being submitted
+       fetch(event.target.action, {
+        method: 'PUT',
+        body: new URLSearchParams(new FormData(event.target)) // event.target is the form
+        }).then((resp) => {
+        return resp.json(); // or resp.text() or whatever the server sends
+        }).then((body) => {
+        alert("Update succeded")
+        // TODO handle body
+        }).jaguarch((error) => {
+        // TODO handle error
+        alert("Update failed " + error )
+       });
+      });

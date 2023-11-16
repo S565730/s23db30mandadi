@@ -109,6 +109,43 @@ exports.jaguar_view_one_Page = async function(req, res) {
     res.send(`{'error': '${err}'}`);
     }
 };
-
-    
+// Handle building the view for creating a jaguar.
+// No body, no in path parameter, no query.
+// Does not need to be async
+exports.jaguar_create_Page = function(req, res) {
+console.log("create view")
+try{
+res.render('jaguarcreate', { title: 'jaguar Create'});
+}
+catch(err){
+res.status(500)
+res.send(`{'error': '${err}'}`);
+}
+};
+// Handle building the view for updating a jaguar.
+// query provides the id
+exports.jaguar_update_Page = async function(req, res) {
+console.log("update view for item "+req.query.id)
+try{
+let result = await jaguar.findById(req.query.id)
+res.render('jaguarupdate', { title: 'jaguar Update', toShow: result });
+}
+catch(err){
+res.status(500)
+res.send(`{'error': '${err}'}`);
+}
+};
+// Handle a delete one view with id from query
+exports.jaguar_delete_Page = async function(req, res) {
+    console.log("Delete view for id " + req.query.id)
+    try{
+    result = await jaguar.findById(req.query.id)
+    res.render('jaguardelete', { title: 'jaguar Delete', toShow:
+    result });
+    }
+    catch(err){
+    res.status(500)
+    res.send(`{'error': '${err}'}`);
+    }
+    };
     
