@@ -4,14 +4,18 @@ block content
         h1= title
         - let items = results;
         - let o;
-        div(class="row")
+        div(class="row m-1")
             each form,item in results
+                - let destination = `dispatch(\"/jaguar/update?id=${item._id}\")`
+                //div(class="row-sm-2", class="m-1") Item #{item.jaguar_colo}(#{item.jaguar_breed}) is #{item.jaguar_price}
                 div(class = "col-sm-2 bg-primary" onclick=`buy(${item})`) #{form.jaguar_color}              
                 div(class = "col-sm-2 bg-primary" onclick=`buy(${item})`) #{form.jaguar_breed}                
                 div(class = "col-sm-2 bg-primary" onclick=`buy(${item})`) #{form.jaguar_price}
-                hr
+                <br><br>
+                button.btn( class="btn-primary ml-1", onclick= destination) Update
+                
     script.
-        function buy(itemNo)
+        function dispatch(path)
         {
-            alert(`You purchased Item ${itemNo+1}`)
+            window.location.href=path
         }
