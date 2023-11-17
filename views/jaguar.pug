@@ -6,10 +6,11 @@ block content
         - let o;
         div(class="row")
             each form,item in results
-                div(class = "col-sm-2 bg-primary" onclick=`buy(${item})`) #{form.jaguar_color}              
-                div(class = "col-sm-2 bg-primary" onclick=`buy(${item})`) #{form.jaguar_breed}                
-                div(class = "col-sm-2 bg-primary" onclick=`buy(${item})`) #{form.jaguar_price}
+                div(class = "col-sm-2 bg-secondary" onclick=`buy(${item})`) #{form.jaguar_color}              
+                div(class = "col-sm-2 bg-secondary" onclick=`buy(${item})`) #{form.jaguar_breed}                
+                div(class = "col-sm-2 bg-secondary" onclick=`buy(${item})`) #{form.jaguar_price}
                 hr
+    
     script.
         function buy(itemNo)
         {
