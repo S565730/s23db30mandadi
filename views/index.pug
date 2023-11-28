@@ -1,20 +1,11 @@
 extends layout
- 
 block content
-  h1= title
-  p Welcome to page
- 
-  button(type="button" class="btn btn-success") Press Me
-  div#faster Increase the speed
-  button(type="button" class="btn btn-primary" onclick="goFaster()") Go Faster
-  script. 
-    let mph = 20;
-    let change = 1;
-    function goFaster() {
-      mph = mph + change;
-      change = change + 1;
-      document.getElementById("faster").innerText = `MPH ${mph} with change ${change}`
-    }
-  hr
-  a(href='/jaguar') jaguarlink
-  
+ if (!user)
+   a(href="/login") Login
+   br
+   a(href="/register") Register
+ if (user)
+   p You are currently logged in as #{user.username}
+   a(href="/jaguar") Take me to jaguar
+   br
+   a(href="/logout") Logout
